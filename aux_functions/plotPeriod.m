@@ -1,9 +1,18 @@
 function plotPeriod(data, dStart, dEnd)
 %plotPeriod(data, dStart, dEnd)
+%Plot a period between two dates
 %
-%   Plot a period between 'dStart' and 'dEnd'.
-%   Both dates have to be in "yyyy-MM-dd" format.
+%   Parameters:
+%   -----------
+%   data = historical data to plot
+%   dStart = initial date
+%   dEnd = final date
 %
+%   Returns:
+%   --------
+%
+%   Example:
+%   --------
 %   plotPeriod(gspc,"2010-1-31","2015-12-10")
 
     if ~exist('data', 'var')
