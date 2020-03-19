@@ -2,6 +2,11 @@
 # Edit at https://www.gitignore.io/?templates=matlab
 
 ### MATLAB ###
+
+#My custom entries
+test.m
+
+
 # Windows default autosave extension
 *.asv
 
