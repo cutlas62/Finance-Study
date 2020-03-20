@@ -31,12 +31,15 @@ nShares = 0;
 
 % 1 - Get range of data between start and end dates
 data = data(data.Date >= startDate & data.Date <= endDate, :);
+plotPeriod(data, startDate, endDate);
+hold on
 
 
 % 2 - Generate all the purchasing dates
 purchasingDates = startDate:calmonths(1):endDate;
 l_purchasingDates = length(purchasingDates);
 fprintf('There are %d items in purchasingDates\n', l_purchasingDates);
+
 
 count = 0;
 j = 1;
@@ -50,8 +53,9 @@ for i = 1 : length(data.Date)
         % 3 - Acquire shares those dates
         tInvested = tInvested + perAmount;
         nShares = nShares + perAmount/data.Open(i);
-        %fprintf('Bought %.4f shares on %s\n', perAmount/data.Open(i), dDay);
-        
+        %fprintf('Bought %.4f shares on %s for %.2f per share\n', perAmount/data.Open(i), dDay, data.Open(i));
+        %fprintf('nShares = %.2f\ttInvested = %d\tAssets = %.2f\n', nShares, tInvested, nShares * data.Open(i));
+        plot(data.Date(i), data.Open(i), 'm*');
         
         j = j + 1;
         count = count + 1;
@@ -60,18 +64,15 @@ for i = 1 : length(data.Date)
         end
     end 
 end
+legend('SPY','Purchasing Dates')
+title('Investment simulation with DCA')
+ylabel('Price in USD')
+hold off
 
 % 4 - Calculate the final price of those shares
-tAssets = tInvested + nShares * data.Open(end);
-
+tAssets = nShares * data.Open(i);
 nYears = datenum(endDate-startDate) / 365;
 aagr = (tAssets - tInvested)/ tInvested / nYears * 100;
-
-fprintf('We have bought %d times\n', count);
-fprintf('nShares = %.4f\n', nShares);
-fprintf('tInvested = %d\n', tInvested);
-fprintf('tAssets = %.2f\n', tAssets);
-fprintf('AAGR = %.2f%%\n', aagr);
 
 end
 

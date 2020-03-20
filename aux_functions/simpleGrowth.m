@@ -1,13 +1,13 @@
-function [endWealth, difference, aagr] = simpleGrowth(data, startWealth, startDate, endDate)
-%[endWealth, difference, aagr] = simpleGrowth(data, startWealth, startDate, endDate)
+function [endWealth, difference, aagr] = simpleGrowth(data, startDate, endDate, startWealth)
+%[endWealth, difference, aagr] = simpleGrowth(data, startDate, endDate, startWealth)
 %Calculate the final value and AAGR of a single-time investment
 %
 %   Parameters:
 %   -----------
 %   data = historical data to analyze
-%   startWealth = initial investment
 %   startDate = initial date in the format "yyyy-MM-dd"
 %   endDate = final date in the format "yyyy-MM-dd"
+%   startWealth = initial contribution
 %
 %   Return:
 %   -------
@@ -17,7 +17,7 @@ function [endWealth, difference, aagr] = simpleGrowth(data, startWealth, startDa
 %
 %   Example:
 %   --------
-%   [endWealth, diff, aagr] = simpleGrowth(gspc,1000,"2008-1-4","2018-1-2");
+%   [endWealth, diff, aagr] = simpleGrowth(gspc,"2008-1-4","2018-1-2", 1000);
 
 startDate = datetime(startDate, 'Inputformat', 'yyyy-MM-dd');
 endDate = datetime(endDate, 'InputFormat', 'yyyy-MM-dd');
