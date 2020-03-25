@@ -32,5 +32,5 @@ function plotPeriod(data, dStart, dEnd)
     
     dateRange = (data.Date >= startDate) & (data.Date <= endDate);
     
-    plot(data.Date(dateRange), data.Open(dateRange))
+    plot(data.Date(dateRange), data.Open(dateRange), 'LineWidth', 2)
 end

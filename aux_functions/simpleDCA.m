@@ -36,9 +36,9 @@ hold on
 
 
 % 2 - Generate all the purchasing dates
-purchasingDates = startDate:calmonths(1):endDate;
+purchasingDates = startDate:calmonths(6):endDate;
 l_purchasingDates = length(purchasingDates);
-fprintf('There are %d items in purchasingDates\n', l_purchasingDates);
+%fprintf('There are %d items in purchasingDates\n', l_purchasingDates);
 
 
 count = 0;
@@ -55,7 +55,7 @@ for i = 1 : length(data.Date)
         nShares = nShares + perAmount/data.Open(i);
         %fprintf('Bought %.4f shares on %s for %.2f per share\n', perAmount/data.Open(i), dDay, data.Open(i));
         %fprintf('nShares = %.2f\ttInvested = %d\tAssets = %.2f\n', nShares, tInvested, nShares * data.Open(i));
-        plot(data.Date(i), data.Open(i), 'm*');
+        plot(data.Date(i), data.Open(i), 'go', 'MarkerSize', 5, 'MarkerEdgeColor', [0,0.9,0], 'MarkerFaceColor', [0,0.75,0]);
         
         j = j + 1;
         count = count + 1;
@@ -64,9 +64,11 @@ for i = 1 : length(data.Date)
         end
     end 
 end
-legend('SPY','Purchasing Dates')
+legend('\^GSPC','Purchasing Dates')
 title('Investment simulation with DCA')
-ylabel('Price in USD')
+xlabel('Time')
+ylabel('Price')
+ytickformat('usd')
 hold off
 
 % 4 - Calculate the final price of those shares
