@@ -1,5 +1,5 @@
-function [endWealth, difference, aagr] = simpleGrowth(data, startDate, endDate, startWealth)
-%[endWealth, difference, aagr] = simpleGrowth(data, startDate, endDate, startWealth)
+function [endWealth, difference, aagr] = simpleGrowth(data, startDate, endDate, startWealth, verbose)
+%[endWealth, difference, aagr] = simpleGrowth(data, startDate, endDate, startWealth, verbose)
 %Calculate the final value and AAGR of a single-time investment
 %
 %   Parameters:
@@ -8,6 +8,7 @@ function [endWealth, difference, aagr] = simpleGrowth(data, startDate, endDate, 
 %   startDate = initial date in the format "yyyy-MM-dd"
 %   endDate = final date in the format "yyyy-MM-dd"
 %   startWealth = initial contribution
+%   verbose = enable verbose logging
 %
 %   Return:
 %   -------
@@ -17,7 +18,7 @@ function [endWealth, difference, aagr] = simpleGrowth(data, startDate, endDate, 
 %
 %   Example:
 %   --------
-%   [endWealth, diff, aagr] = simpleGrowth(gspc,"2008-1-4","2018-1-2", 1000);
+%   [endWealth, diff, aagr] = simpleGrowth(gspc,"2008-1-4","2018-1-2", 1000, 0);
 
 startDate = datetime(startDate, 'Inputformat', 'yyyy-MM-dd');
 endDate = datetime(endDate, 'InputFormat', 'yyyy-MM-dd');
@@ -37,16 +38,18 @@ while 1
     
     if(i > 7 || j > 7)
        fprintf('Wrong dates\n')
+       fprintf('\tstartDate: %s\n\tendDate: %s\n', startDate, endDate);
+       fprintf('\ti: %d\n\tj: %d\n', i, j);
        return
     end
     
 end
 
-if (i ~= 0)
+if ((i ~= 0) && verbose)
    fprintf('There was no value for %s so the startDate was changed to %s\n', startDate, startDate + i) 
 end
 
-if (j ~= 0)
+if ((j ~= 0) && verbose)
    fprintf('There was no value for %s so the endDate was changed to %s\n', endDate, endDate + j) 
 end
 
